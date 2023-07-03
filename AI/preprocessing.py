@@ -142,7 +142,10 @@ def unique_word_count(filename):
 
 def mean_words_phrases(ris1, ris2):
     ris = []
+    
     for i in range(0, len(ris1)):
+        if ris2[i]==0:
+            ris2[i] = 1
         ris.append(int(ris1[i]/ris2[i]))
 
     return ris

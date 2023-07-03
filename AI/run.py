@@ -32,28 +32,49 @@ def train_test_split(X, y, test_size=0.3, random_state=None):
 if __name__=='__main__':
   filename = "poesie"
   file_author = "autori"
-  df = dataframe_create.createdataset(filename, file_author)
+  df = dataframe_create.createdatasettest(filename, file_author)
     
   X = df.drop("author", axis=1).values
   y = df["author"].values
       
   X_train, X_test, Y_train, Y_test  = train_test_split(X, y, test_size=0.3)
 
-  epsilon = 0.00000001
+
   X_max = X_train.max(axis=0)
   X_min = X_train.min(axis=0)
 
-  X_train = (X_train - X_min)/(X_max-X_min)
-  X_test = (X_test - X_min)/(X_max-X_min)
+
+  print("XMAX")
+  print(X_max)
+  print("XMIN")
+  print(X_min)
+  #X_train = (X_train - X_min)/(X_max-X_min)
+  #X_test = (X_test - X_min)/(X_max-X_min)
+
+
+  X_max_min_diff = X_max - X_min
+  X_max_min_diff[X_max_min_diff == 0] = 1   # sostituisci i valori zero con 1
+  X_train = (X_train - X_min) / X_max_min_diff
+  X_test = (X_test - X_min)/  X_max_min_diff
+
+
+
+  print(X_train)
+
+  print("--------------------------------------------------")
+  #print(df['word_count'].head(25))
+  print(df)
+  print("--------------------------------------------------")
+  print(len(df))
+  print("--------------------------------------------------")
 
 
 
   model = tf.keras.models.Sequential([
-      tf.keras.layers.Dense(7, activation='relu'),
-      tf.keras.layers.Dense(20, activation='relu'),
-      tf.keras.layers.Dense(20, activation='relu'),
-      tf.keras.layers.Dense(20, activation='relu'),
-      tf.keras.layers.Dense(20, activation='relu'),
+      tf.keras.layers.Dense(25, activation='relu'),
+      tf.keras.layers.Dense(30, activation='relu'),
+      tf.keras.layers.Dense(30, activation='relu'),
+      tf.keras.layers.Dense(30, activation='relu'),
       tf.keras.layers.Dense(2)    
   ])
 
@@ -76,7 +97,7 @@ if __name__=='__main__':
               metrics=['accuracy'])
 
 
-  model.fit(x_train, y_train, epochs=200)
+  model.fit(x_train, y_train, epochs=300)
 
 
   model.evaluate(x_test,  y_test, verbose=2)
@@ -88,15 +109,16 @@ if __name__=='__main__':
   ])
 
 
-
+  '''
   filename2 = "predizioni"
   file_author2 = "predizioni_autori"
-  df2 = dataframe_create.createdataset2(filename2, file_author2)
+  df2 = dataframe_create.createdataset2test(filename2, file_author2)
 
   X_new = df2.values
 
   
-  X_new = (X_new - X_min)/(X_max-X_min)
+  #X_new = (X_new - X_min)/(X_max-X_min)
+  X_new = (X_new - X_min)/ X_max_min_diff
 
   input_prediction = model.predict(X_new)
 
@@ -104,10 +126,4 @@ if __name__=='__main__':
 
   print("Predizioni:")
   print(input_pred_label)
-
-
-    
-
-
-
-
+  '''
