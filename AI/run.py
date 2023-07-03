@@ -44,10 +44,10 @@ if __name__=='__main__':
   X_min = X_train.min(axis=0)
 
 
-  print("XMAX")
-  print(X_max)
-  print("XMIN")
-  print(X_min)
+  #print("XMAX")
+  #print(X_max)
+  #print("XMIN")
+  #print(X_min)
   #X_train = (X_train - X_min)/(X_max-X_min)
   #X_test = (X_test - X_min)/(X_max-X_min)
 
@@ -58,7 +58,7 @@ if __name__=='__main__':
   X_test = (X_test - X_min)/  X_max_min_diff
 
 
-
+  '''
   print(X_train)
 
   print("--------------------------------------------------")
@@ -67,7 +67,7 @@ if __name__=='__main__':
   print("--------------------------------------------------")
   print(len(df))
   print("--------------------------------------------------")
-
+  '''
 
 
   model = tf.keras.models.Sequential([
@@ -109,7 +109,7 @@ if __name__=='__main__':
   ])
 
 
-  '''
+  
   filename2 = "predizioni"
   file_author2 = "predizioni_autori"
   df2 = dataframe_create.createdataset2test(filename2, file_author2)
@@ -126,4 +126,4 @@ if __name__=='__main__':
 
   print("Predizioni:")
   print(input_pred_label)
-  '''
+  
