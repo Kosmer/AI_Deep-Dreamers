@@ -9,7 +9,7 @@ def createdataset(filename, file_author):
     comma_count = preprocessing.comma_count("./" + filename + ".txt")
     exclamation_count = preprocessing.exclamation_count("./" + filename + ".txt")
     unique_word_count = preprocessing.unique_word_count2("./" + filename + ".txt")
-    #mean_words_phrases = preprocessing.mean_words_phrases(word_count, sentence_count)ù
+    #mean_words_phrases = preprocessing.mean_words_phrases(word_count, sentence_count)
     pos = preprocessing.postag_count("./" + filename + ".txt")
     author = preprocessing.author("./" + file_author + ".txt")
 

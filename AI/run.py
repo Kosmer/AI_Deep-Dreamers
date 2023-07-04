@@ -97,7 +97,7 @@ if __name__=='__main__':
               metrics=['accuracy'])
 
 
-  model.fit(x_train, y_train, epochs=300)
+  model.fit(x_train, y_train, epochs=200)
 
 
   model.evaluate(x_test,  y_test, verbose=2)
