@@ -33,8 +33,6 @@ def normalize_text(text):
     return " ".join(tokens)
 
 
-
-
 #calcola il numero di parole
 
 def word_count(filename):
@@ -78,12 +76,6 @@ def postag_count(filename):
 
         
     return ris
-
-
-
-
-
-
 
 
 def word_count2(filename):
@@ -164,9 +156,6 @@ def exclamation_count(filename):
             ris.append(exclamation_count)
     
     return ris
-
-
-
 
 
 #numero di parole diverse, va fare prima e dopo la normalizzazione
