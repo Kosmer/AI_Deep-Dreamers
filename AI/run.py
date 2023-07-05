@@ -7,6 +7,7 @@ from sklearn.tree import DecisionTreeClassifier,plot_tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV
 import matplotlib.pyplot as plt
 import os
 
@@ -75,27 +76,94 @@ def decision_tree(x_train, y_train, x_test, y_test):
  # TODO function decision tree +  tuning (grid search cross validation)
  print("Risultati decision tree:")
  dt = DecisionTreeClassifier()
- dt.fit(x_train, y_train)
- print(dt.score(x_train, y_train), dt.score(x_test, y_test))
+
+ # parametri per tuning
+ params = {
+    'criterion': ['gini','entropy','log_loss'],
+    'splitter': ['best', 'random'],
+    'max_depth': [2,4,6,8,10,12],
+    'min_samples_split':range(2,10),
+    'min_samples_leaf':range(1,5)
+ }
+
+ clf = GridSearchCV(
+    estimator=dt,
+    param_grid=params,
+    cv=5,
+    n_jobs=8,
+    verbose=1
+ )
+
+ clf.fit(x_train, y_train)
+ # stampa la migliore combinazione di parametri e punteggio
+ print(clf.best_params_)
+ print(clf.best_estimator_)
+ print(clf.best_score_)
+ #dt.fit(x_train, y_train)
+ #print(dt.score(x_train, y_train), dt.score(x_test, y_test))
  # TODO plot delle caratteristiche piu importanti ()
- plot_tree(dt, filled=True, rounded = True, proportion = True)
- plt.show()
+ #plot_tree(dt, filled=True, rounded = True, proportion = True)
+ #plt.show()
 
 def random_forest(x_train, y_train, x_test, y_test):
  print("Risultati random forest:")
  rf = RandomForestClassifier()
- rf.fit(x_train, y_train)
- print(rf.score(x_train, y_train), rf.score(x_test, y_test))
+
+ # parametri per tuning
+ params = {
+    'n_estimators': [200, 300],
+    'max_features': ['auto', 'sqrt', 'log2'],
+    'max_depth' : [4,6,8],
+    'criterion' :['gini', 'entropy'],
+    'min_samples_split':[2,6,10]
+ }
+
+ clf = GridSearchCV(
+    estimator=rf,
+    param_grid=params,
+    cv=5,
+    n_jobs=8,
+    verbose=1
+ )
+
+ clf.fit(x_train, y_train)
+ # stampa la migliore combinazione di parametri e punteggio
+ print(clf.best_params_)
+ print(clf.best_estimator_)
+ print(clf.best_score_)
+ #rf.fit(x_train, y_train)
+ #print(rf.score(x_train, y_train), rf.score(x_test, y_test))
  # dal grafico si vede l'importanza di una feature (i tag non servono quasi a nulla)
  # TODO vedere la correlazione delle feature
- plt.bar(range(0,X_train.shape[1]), rf.feature_importances_)
- plt.show()
+ #plt.bar(range(0,X_train.shape[1]), rf.feature_importances_)
+ #plt.show()
 
 def svm(x_train, y_train, x_test, y_test):
  print("Risultati support vector machine:")
  svm = SVC()
- svm.fit(x_train, y_train)
- print(svm.score(x_train, y_train), svm.score(x_test, y_test))
+
+  # parametri per tuning
+ params = {
+    'C': [0.1, 1, 10, 100, 1000], 
+    'gamma': [1, 0.1, 0.01, 0.001, 0.0001],
+    'kernel': ['rbf', 'poly', 'sigmoid']
+ } 
+
+ clf = GridSearchCV(
+    estimator=svm,
+    param_grid=params,
+    cv=5,
+    n_jobs=8,
+    verbose=1
+ )
+
+ clf.fit(x_train, y_train)
+ # stampa la migliore combinazione di parametri e punteggio
+ print(clf.best_params_)
+ print(clf.best_estimator_)
+ print(clf.best_score_)
+ #svm.fit(x_train, y_train)
+ #print(svm.score(x_train, y_train), svm.score(x_test, y_test))
 
 ##################################### MAIN ###############################################
 if __name__=='__main__':
