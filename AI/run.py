@@ -112,7 +112,7 @@ def random_forest(x_train, y_train, x_test, y_test):
  # parametri per tuning
  params = {
     'n_estimators': [200, 300],
-    'max_features': ['auto', 'sqrt', 'log2'],
+    'max_features': ['sqrt', 'log2'],
     'max_depth' : [4,6,8],
     'criterion' :['gini', 'entropy'],
     'min_samples_split':[2,6,10]
