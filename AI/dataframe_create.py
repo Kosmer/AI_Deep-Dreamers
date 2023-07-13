@@ -47,10 +47,14 @@ def createdatasettest(filename, file_author):
     exclamation_count = preprocessing.exclamation_count("./" + filename + ".txt")
     unique_word_count = preprocessing.unique_word_count2("./" + filename + ".txt")
     mean_words_phrases = preprocessing.mean_words_phrases(word_count, sentence_count)
+    pol_sub = preprocessing.polarity_subjectivity("./" + filename + ".txt")
+    polarity = pol_sub[0]
+    subjectivity = pol_sub[1]
+    rhymes = preprocessing.rhymes("./" + filename + ".txt")
     pos = preprocessing.postag_count("./" + filename + ".txt")
     author = preprocessing.author("./" + file_author + ".txt")
 
-    pos0 = pos1 = pos2 = pos3 = pos4 = pos5 = pos6 = pos7 = pos8 = pos9 = pos10 = pos11 = pos12 = pos13 = pos14 = pos15 = pos16 = pos17 = pos18 =[]
+    pos0 = pos1 = pos2 = pos3 = pos4 = pos5 = pos6 = pos7 = pos8 = pos9 = pos10 = pos11 = pos12 = pos13 = pos14 = pos15 = pos16 = pos17 = pos18 = []
     for lista in pos:
         pos0.append(lista[0])
         pos1.append(lista[1])
@@ -73,7 +77,7 @@ def createdatasettest(filename, file_author):
         pos18.append(lista[18])
 
     #df = pd.DataFrame(list(zip(author,word_count,sentence_count, comma_count, exclamation_count, unique_word_count, mean_words_phrases)), columns = ['author','word_count','sentence_count', 'comma_count','exclamation_count','unique_word_count','mean_words_phrases'])
-    df = pd.DataFrame(list(zip(author,word_count,sentence_count, comma_count, exclamation_count, unique_word_count, mean_words_phrases, pos0, pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18)), columns = ['author','word_count','sentence_count', 'comma_count','exclamation_count','unique_word_count', 'mean_words_phrases', 'POS0','POS1','POS2','POS3','POS4','POS5','POS6','POS7','POS8','POS9','POS10','POS11','POS12','POS13','POS14','POS15','POS16','POS17','POS18'])
+    df = pd.DataFrame(list(zip(author,word_count,sentence_count, comma_count, exclamation_count, unique_word_count, mean_words_phrases, polarity, subjectivity, rhymes, pos0, pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18)), columns = ['author','word_count','sentence_count', 'comma_count','exclamation_count','unique_word_count', 'mean_words_phrases', 'polarity', 'subjectivity', 'rhymes','POS0','POS1','POS2','POS3','POS4','POS5','POS6','POS7','POS8','POS9','POS10','POS11','POS12','POS13','POS14','POS15','POS16','POS17','POS18'])
     #df = pd.DataFrame(attributes, columns=namecolumns)
     return df
 
@@ -85,6 +89,10 @@ def createdataset2test(filename, file_author):
     exclamation_count = preprocessing.exclamation_count("./" + filename + ".txt")
     unique_word_count = preprocessing.unique_word_count2("./" + filename + ".txt")
     mean_words_phrases = preprocessing.mean_words_phrases(word_count, sentence_count)
+    pol_sub = preprocessing.polarity_subjectivity("./" + filename + ".txt")
+    polarity = pol_sub[0]
+    subjectivity = pol_sub[1]
+    rhymes = preprocessing.rhymes("./" + filename + ".txt")
     pos = preprocessing.postag_count("./" + filename + ".txt")
     author = preprocessing.author("./" + file_author + ".txt")
 
@@ -114,6 +122,6 @@ def createdataset2test(filename, file_author):
 
 
     #df = pd.DataFrame(list(zip(author,word_count,sentence_count, comma_count, exclamation_count, unique_word_count, mean_words_phrases)), columns = ['author','word_count','sentence_count', 'comma_count','exclamation_count','unique_word_count','mean_words_phrases'])
-    df = pd.DataFrame(list(zip(word_count,sentence_count, comma_count, exclamation_count, unique_word_count, mean_words_phrases, pos0, pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18)), columns = ['word_count','sentence_count', 'comma_count','exclamation_count','unique_word_count', 'mean_words_phrases', 'POS0','POS1','POS2','POS3','POS4','POS5','POS6','POS7','POS8','POS9','POS10','POS11','POS12','POS13','POS14','POS15','POS16','POS17','POS18'])
+    df = pd.DataFrame(list(zip(word_count,sentence_count, comma_count, exclamation_count, unique_word_count, mean_words_phrases, polarity, subjectivity, rhymes, pos0, pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18)), columns = ['word_count','sentence_count', 'comma_count','exclamation_count','unique_word_count', 'mean_words_phrases', 'polarity', 'subjectivity', 'rhymes', 'POS0','POS1','POS2','POS3','POS4','POS5','POS6','POS7','POS8','POS9','POS10','POS11','POS12','POS13','POS14','POS15','POS16','POS17','POS18'])
     #df = pd.DataFrame(attributes, columns=namecolumns)
     return df

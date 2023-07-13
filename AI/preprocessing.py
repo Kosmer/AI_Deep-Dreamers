@@ -18,6 +18,8 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import re
 import spacy
+from pattern.it import sentiment
+from nltk.corpus import cmudict
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -176,7 +178,61 @@ def unique_word_count2(filename):
 
     return ris
 
+# felicita della frase + quanto è sicuro che il primo valore sia corretto
+def polarity_subjectivity(filename):
+    ris1 = []
+    ris2 = []
+    with open(filename, 'r', encoding="utf8") as file:
+        text = file.read()
+        ntext = text.split('*')
+        for i in range(0, len(ntext)-1):
+            polarity = sentiment(ntext[i])[0]
+            subjectivity = sentiment(ntext[i])[1]
+            ris1.append(polarity)
+            ris2.append(subjectivity)
 
+    return ris1, ris2
+
+# identifica rime - da rimuovere (mette tutti 5)
+def rhymes(filename):
+    nltk.download('cmudict')    
+    ris = []
+
+    with open(filename, 'r', encoding="utf8") as file:
+        text = file.read()
+        ntext = text.split('*')
+        for i in range(0, len(ntext)-1):
+
+            parole = nltk.word_tokenize(ntext[i])
+            parole_rime = [parola.lower() for parola in parole if parola.isalpha()]
+    
+            pronunce = cmudict.dict()
+    
+            schema_rima = []
+            ultime_sillabe = []
+    
+            for parola in parole_rime:
+                if parola in pronunce:
+                    pronuncia = pronunce[parola][0]
+                    sillabe = [sillaba[-1] for sillaba in pronuncia if sillaba[-1].isdigit()]
+                    ultima_sillaba = ''.join(sillabe)
+            
+                    ultime_sillabe.append(ultima_sillaba)
+            
+            if ultime_sillabe:
+                if ultime_sillabe.count(ultime_sillabe[0]) == len(ultime_sillabe):
+                    ris.append(1) #rima AAAA
+                elif ultime_sillabe[::2] == ultime_sillabe[1::2]:
+                    ris.append(2) #rima ABAB
+                elif ultime_sillabe == ultime_sillabe[::-1]:
+                    ris.append(3) #rima ABBA
+                elif ultime_sillabe[::2] == ultime_sillabe[1::2] and ultime_sillabe[::2] == ultime_sillabe[::-2]:
+                    ris.append(4) #rima AABB
+                else:
+                    ris.append(5) # altro schema di rime
+            else:
+                ris.append(0) # nessuna rima
+    return ris
 
 def number(filename):
     ris = []
@@ -195,6 +251,10 @@ def author(filename):
             ris.append(int(ntext[i])) 
         
         return ris
+
+
+
+
 
 
 '''

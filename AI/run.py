@@ -24,7 +24,7 @@ def neural_network(x_train, y_train, x_test, y_test):
  print("--------------------------------------------------")
  '''
  model = tf.keras.models.Sequential([
-    tf.keras.layers.Dense(25, activation='relu'),
+    tf.keras.layers.Dense(29, activation='relu'),
     tf.keras.layers.Dense(1000, activation='relu'),
     tf.keras.layers.Dense(500, activation='relu'),
     tf.keras.layers.Dense(1000, activation='relu'),
@@ -135,8 +135,8 @@ def random_forest(x_train, y_train, x_test, y_test):
  print("Risultati test random forest:")
  print(clf.score(x_test, y_test))
  # dal grafico si vede l'importanza di una feature (i tag non servono quasi a nulla)
- #plt.bar(range(0,X_train.shape[1]), rf.feature_importances_)
- #plt.show()
+ plt.bar(range(0,x_train.shape[1]), clf.best_estimator_.feature_importances_)
+ plt.show()
 
 def svm(x_train, y_train, x_test, y_test):
  print("--------------- SUPPORT VECTOR MACHINE ---------------")
@@ -144,8 +144,8 @@ def svm(x_train, y_train, x_test, y_test):
 
   # parametri per tuning
  params = {
-    'C': [7000,6500,6000], 
-    'gamma': [1,2],
+    'C': [7000,6500], 
+    'gamma': [1],
     'kernel': ['rbf', 'poly', 'sigmoid']
  } 
 
@@ -204,14 +204,14 @@ if __name__=='__main__':
 
 
   #rete neurale
-  #neural_network(X_train, Y_train, X_test, Y_test)
+  neural_network(X_train, Y_train, X_test, Y_test)
   
   #decision tree
-  #decision_tree(X_train, Y_train, X_test, Y_test)
+  decision_tree(X_train, Y_train, X_test, Y_test)
 
   #random forest
-  #random_forest(X_train, Y_train, X_test, Y_test)
+  random_forest(X_train, Y_train, X_test, Y_test)
   
   #svm
-  #svm(X_train, Y_train, X_test, Y_test)
+  svm(X_train, Y_train, X_test, Y_test)
  
