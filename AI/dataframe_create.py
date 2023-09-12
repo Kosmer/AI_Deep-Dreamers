@@ -82,7 +82,7 @@ def createdatasettest(filename, file_author):
     return df
 
 
-def createdataset2test(filename, file_author):
+def createdataset2test(filename):
     word_count = preprocessing.word_count("./" + filename + ".txt")
     sentence_count = preprocessing.sentence_count("./" + filename + ".txt")
     comma_count = preprocessing.comma_count("./" + filename + ".txt")
@@ -94,7 +94,7 @@ def createdataset2test(filename, file_author):
     subjectivity = pol_sub[1]
     rhymes = preprocessing.rhymes("./" + filename + ".txt")
     pos = preprocessing.postag_count("./" + filename + ".txt")
-    author = preprocessing.author("./" + file_author + ".txt")
+    
 
     
 
