@@ -35,7 +35,7 @@ def print_result_decision_tree(clf, x_test, y_test):
    print("\n************************************************************************************************\n")
 
 
-def print_result_random_forest(clf, x_test, y_test):
+def print_result_random_forest(clf, x_train, x_test, y_test):
    # stampa la migliore combinazione di parametri e punteggio
    print("------------------------- Risultati train random forest: ------------------------------")
    print(clf.best_params_)
@@ -44,11 +44,9 @@ def print_result_random_forest(clf, x_test, y_test):
    print("------------------------- Risultati test random forest: ------------------------------")
    print(clf.score(x_test, y_test))
 
-   #TODO
-   # Aggiungere X_train ai parametri da passare da create_models.py e importarlo qui
    # dal grafico si vede l'importanza di una feature (i tag non servono quasi a nulla)
-   #plt.bar(range(0,x_train.shape[1]), clf.best_estimator_.feature_importances_)
-   #plt.show()
+   plt.bar(range(0,x_train.shape[1]), clf.best_estimator_.feature_importances_)
+   plt.show()
    print("\n************************************************************************************************\n")
 
 
@@ -81,10 +79,11 @@ if __name__=='__main__':
 
    # Carica le variabili dal file .npz
    data = np.load('dati_test.npz')
+   X_train = data['X_train']
    X_test = data['X_test']
    Y_test = data['Y_test']
 
    print_result_neural_network(modello_rete_neurale, X_test, Y_test)
    print_result_decision_tree(modello_decision_tree, X_test, Y_test)
-   print_result_random_forest(modello_random_forest, X_test, Y_test)
+   print_result_random_forest(modello_random_forest, X_train, X_test, Y_test)
    print_result_svm(modello_svm, X_test, Y_test)

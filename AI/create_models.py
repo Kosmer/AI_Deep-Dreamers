@@ -29,7 +29,7 @@ def neural_network(x_train, y_train, x_test, y_test):
  print("--------------------------------------------------")
  '''
  model = tf.keras.models.Sequential([
-    tf.keras.layers.Dense(29, activation='relu'),
+    tf.keras.layers.Dense(28, activation='relu'),
     tf.keras.layers.Dense(1000, activation='relu'),
     tf.keras.layers.Dense(500, activation='relu'),
     tf.keras.layers.Dense(1000, activation='relu'),
@@ -67,7 +67,7 @@ def neural_network(x_train, y_train, x_test, y_test):
  #predizioni con rete neurale
  filename2 = "predizioni"
  file_author2 = "predizioni_autori"
- df2 = dataframe_create.createdataset2test(filename2)
+ df2 = dataframe_create.createdataset4predict(filename2)
 
  X_new = df2.values
   
@@ -197,11 +197,8 @@ if __name__=='__main__':
   X_train = (X_train - X_min) / X_max_min_diff
   X_test = (X_test - X_min)/  X_max_min_diff
 
-  # Salvo i valori x_min e X_max_min_diff. Mi saranno utili per le previsioni
-  np.savez('min_max_values.npz', X_min=X_min, X_max_min_diff=X_max_min_diff)
-
   # Salvo i valori x_test e y_test. Mi saranno utili per mostrare gli score ottenuti con i vari modelli successivamente
-  np.savez('dati_test.npz', X_test=X_test, Y_test=Y_test)
+  np.savez('dati_test.npz', X_train= X_train, X_test=X_test, Y_test=Y_test)
 
   #rete neurale
   neural_network(X_train, Y_train, X_test, Y_test)

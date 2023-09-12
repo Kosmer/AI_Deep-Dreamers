@@ -10,8 +10,9 @@
 
 
 
-#normalizzazione del testo
-
+#normalizzazione del testo 
+# Probabilmente non usata, ne nltk ne la normalizzazione
+'''
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -33,7 +34,7 @@ def normalize_text(text):
     lemmatizer = WordNetLemmatizer()
     tokens = [lemmatizer.lemmatize(word) for word in tokens]
     return " ".join(tokens)
-
+'''
 
 #calcola il numero di parole
 
@@ -193,46 +194,6 @@ def polarity_subjectivity(filename):
 
     return ris1, ris2
 
-# identifica rime - da rimuovere (mette tutti 5)
-def rhymes(filename):
-    nltk.download('cmudict')    
-    ris = []
-
-    with open(filename, 'r', encoding="utf8") as file:
-        text = file.read()
-        ntext = text.split('*')
-        for i in range(0, len(ntext)-1):
-
-            parole = nltk.word_tokenize(ntext[i])
-            parole_rime = [parola.lower() for parola in parole if parola.isalpha()]
-    
-            pronunce = cmudict.dict()
-    
-            schema_rima = []
-            ultime_sillabe = []
-    
-            for parola in parole_rime:
-                if parola in pronunce:
-                    pronuncia = pronunce[parola][0]
-                    sillabe = [sillaba[-1] for sillaba in pronuncia if sillaba[-1].isdigit()]
-                    ultima_sillaba = ''.join(sillabe)
-            
-                    ultime_sillabe.append(ultima_sillaba)
-            
-            if ultime_sillabe:
-                if ultime_sillabe.count(ultime_sillabe[0]) == len(ultime_sillabe):
-                    ris.append(1) #rima AAAA
-                elif ultime_sillabe[::2] == ultime_sillabe[1::2]:
-                    ris.append(2) #rima ABAB
-                elif ultime_sillabe == ultime_sillabe[::-1]:
-                    ris.append(3) #rima ABBA
-                elif ultime_sillabe[::2] == ultime_sillabe[1::2] and ultime_sillabe[::2] == ultime_sillabe[::-2]:
-                    ris.append(4) #rima AABB
-                else:
-                    ris.append(5) # altro schema di rime
-            else:
-                ris.append(0) # nessuna rima
-    return ris
 
 def number(filename):
     ris = []
