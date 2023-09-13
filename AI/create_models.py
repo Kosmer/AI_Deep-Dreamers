@@ -83,6 +83,7 @@ def neural_network(x_train, y_train, x_test, y_test):
  print("Predizioni:")
  print(input_pred_label)
  '''
+ 
 
 def decision_tree(x_train, y_train, x_test, y_test):
  print("--------------- DECISION TREE ---------------")
@@ -92,7 +93,7 @@ def decision_tree(x_train, y_train, x_test, y_test):
  params = {
     'criterion': ['gini','entropy','log_loss'],
     'splitter': ['best', 'random'],
-    'max_depth': [10,12,14,16,18],
+    'max_depth': [5, 8],
     'min_samples_split':range(2,10),
     'min_samples_leaf':range(1,5)
  }
@@ -172,7 +173,7 @@ if __name__=='__main__':
   if os.path.isfile("./"+csv_file):
     df = pd.read_csv(csv_file)
   else:
-   df = dataframe_create.createdatasettest(filename, file_author)
+   df = dataframe_create.createdataset(filename, file_author)
    df.to_csv("dataframe.csv", index=False)
  
 
@@ -197,6 +198,9 @@ if __name__=='__main__':
   X_train = (X_train - X_min) / X_max_min_diff
   X_test = (X_test - X_min)/  X_max_min_diff
 
+  # Salvo i valori x_test e y_test. Mi saranno utili per mostrare gli score ottenuti con i vari modelli successivamente
+  np.savez('x_max_min.npz', X_min= X_min, X_max_min_diff = X_max_min_diff)
+  
   # Salvo i valori x_test e y_test. Mi saranno utili per mostrare gli score ottenuti con i vari modelli successivamente
   np.savez('dati_test.npz', X_train= X_train, X_test=X_test, Y_test=Y_test)
 
