@@ -6,6 +6,7 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier,plot_tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
+from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 import matplotlib.pyplot as plt
@@ -93,7 +94,7 @@ def decision_tree(x_train, y_train, x_test, y_test):
  params = {
     'criterion': ['gini','entropy','log_loss'],
     'splitter': ['best', 'random'],
-    'max_depth': [5, 8],
+    'max_depth': [10,12,14,16,18],
     'min_samples_split':range(2,10),
     'min_samples_leaf':range(1,5)
  }
@@ -107,6 +108,9 @@ def decision_tree(x_train, y_train, x_test, y_test):
  )
 
  clf.fit(x_train, y_train)
+
+ y_pred = clf.predict(x_test)
+ print(confusion_matrix(y_test, y_pred))
 
  #salvo modello decision tree 
  joblib.dump(clf, 'modello_decision_tree.pkl')
@@ -186,6 +190,11 @@ if __name__=='__main__':
   X_max = X_train.max(axis=0)
   X_min = X_train.min(axis=0)
 
+  print(min(X_test[:, 0]))
+  print(max(X_test[:, 0]))
+
+  plt.hist(X_test[:, 0], bins=200)
+  plt.show()
   #print("XMAX")
   #print(X_max)
   #print("XMIN")

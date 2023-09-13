@@ -10,30 +10,34 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 import matplotlib.pyplot as plt
 import os
+from sklearn.metrics import confusion_matrix, classification_report
 import joblib
 
 
-def print_result_neural_network(model, x_test, y_test):
+
+def print_result_neural_network(model, x_test, y_test, x_new):
    # stampa la migliore combinazione di parametri e punteggio
    print("------------------------- Risultati Rete Neurale : ------------------------------")
    model.evaluate(x_test,  y_test, verbose=2)
 
 
    print("------------------------- PREVISIONI: ------------------------------")
-   input_prediction = model.predict(X_new)
+   input_prediction = model.predict(x_new)
 
    input_pred_label = np.argmax(input_prediction, axis=-1)
    print(input_pred_label)
+   print("[1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1]")
    print("\n************************************************************************************************\n")
 
 
 
-def print_result_decision_tree(clf, x_test, y_test):
+def print_result_decision_tree(clf, x_test, y_test, x_new):
    # stampa la migliore combinazione di parametri e punteggio
    print("------------------------- Risultati train decision tree: ------------------------------")
    print(clf.best_params_)
    print(clf.best_estimator_)
    print(clf.best_score_)
+   print(classification_report(y_test, clf.predict(x_test)))
    print("------------------------- Risultati test decision tree: ------------------------------")
    print(clf.score(x_test, y_test))
 
@@ -45,19 +49,21 @@ def print_result_decision_tree(clf, x_test, y_test):
    #plt.show()
 
    print("------------------------- PREVISIONI: ------------------------------")
-   input_prediction = clf.predict(X_new)
+   input_prediction = clf.predict(x_new)
    print(input_prediction)
+   print("[1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1]")
    print("\n************************************************************************************************\n")
    
    
 
 
-def print_result_random_forest(clf, x_train, x_test, y_test):
+def print_result_random_forest(clf, x_train, x_test, y_test, x_new):
    # stampa la migliore combinazione di parametri e punteggio
    print("------------------------- Risultati train random forest: ------------------------------")
    print(clf.best_params_)
    print(clf.best_estimator_)
    print(clf.best_score_)
+   print(classification_report(y_test, clf.predict(x_test)))
    print("------------------------- Risultati test random forest: ------------------------------")
    print(clf.score(x_test, y_test))
 
@@ -66,29 +72,32 @@ def print_result_random_forest(clf, x_train, x_test, y_test):
    plt.show()
 
    print("------------------------- PREVISIONI: ------------------------------")
-   input_prediction = clf.predict(X_new)
+   input_prediction = clf.predict(x_new)
    print(input_prediction)
+   print("[1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1]")
    print("\n************************************************************************************************\n")
 
 
-def print_result_svm(clf, x_test, y_test):
+def print_result_svm(clf, x_test, y_test, x_new):
    # stampa la migliore combinazione di parametri e punteggio
    print("------------------------- Risultati train SVM: ------------------------------")
    print(clf.best_params_)
    print(clf.best_estimator_)
    print(clf.best_score_)
+   print(classification_report(y_test, clf.predict(x_test)))
    print("------------------------- Risultati test SVM: ------------------------------")
+
    print(clf.score(x_test, y_test))
 
    print("------------------------- PREVISIONI: ------------------------------")
-   input_prediction = clf.predict(X_new)
+   input_prediction = clf.predict(x_new)
    print(input_prediction)
+   print("[1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1]")
    print("\n************************************************************************************************\n")
 
 
 
 if __name__=='__main__':
-   import numpy as np
 
    # Carica il modello della rete neurale
    modello_rete_neurale = tf.keras.models.load_model("modello_rete_neurale.h5")
@@ -121,7 +130,7 @@ if __name__=='__main__':
    X_new = df2.values
    X_new = (X_new - X_min)/ X_max_min_diff
 
-   print_result_neural_network(modello_rete_neurale, X_test, Y_test)
-   print_result_decision_tree(modello_decision_tree, X_test, Y_test)
-   print_result_random_forest(modello_random_forest, X_train, X_test, Y_test)
-   print_result_svm(modello_svm, X_test, Y_test)
+   print_result_neural_network(modello_rete_neurale, X_test, Y_test, X_new)
+   print_result_decision_tree(modello_decision_tree, X_test, Y_test, X_new)
+   print_result_random_forest(modello_random_forest, X_train, X_test, Y_test, X_new)
+   print_result_svm(modello_svm, X_test, Y_test, X_new)
