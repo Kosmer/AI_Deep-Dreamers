@@ -109,6 +109,7 @@ def decision_tree(x_train, y_train, x_test, y_test):
 
  clf.fit(x_train, y_train)
 
+ #confusion matrix
  y_pred = clf.predict(x_test)
  print(confusion_matrix(y_test, y_pred))
 
@@ -140,6 +141,11 @@ def random_forest(x_train, y_train, x_test, y_test):
 
  clf.fit(x_train, y_train)
 
+
+ #confusion matrix
+ y_pred = clf.predict(x_test)
+ print(confusion_matrix(y_test, y_pred))
+
  joblib.dump(clf, 'modello_random_forest.pkl')
 
 
@@ -163,6 +169,10 @@ def svm(x_train, y_train, x_test, y_test):
  )
 
  clf.fit(x_train, y_train)
+
+ #confusion matrix
+ y_pred = clf.predict(x_test)
+ print(confusion_matrix(y_test, y_pred))
 
  joblib.dump(clf, 'modello_svm.pkl')
 
