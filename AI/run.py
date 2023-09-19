@@ -26,7 +26,7 @@ def print_result_neural_network(model, x_test, y_test, x_new):
 
    input_pred_label = np.argmax(input_prediction, axis=-1)
    print(input_pred_label)
-   print("[1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1]")
+   print("[1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1]")
    '''
    print("\n************************************************************************************************\n")
 
@@ -48,12 +48,12 @@ def print_result_decision_tree(clf, x_test, y_test, x_new):
    # plot delle caratteristiche piu importanti ()
    #plot_tree(dt, filled=True, rounded = True, proportion = True)
    #plt.show()
-   '''
+   
    print("------------------------- PREVISIONI: ------------------------------")
    input_prediction = clf.predict(x_new)
    print(input_prediction)
-   print("[1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1]")
-   '''
+   
+   
    print("\n************************************************************************************************\n")
    
    
@@ -72,12 +72,12 @@ def print_result_random_forest(clf, x_train, x_test, y_test, x_new):
    # dal grafico si vede l'importanza di una feature (i tag non servono quasi a nulla)
    plt.bar(range(0,x_train.shape[1]), clf.best_estimator_.feature_importances_)
    plt.show()
-   '''
+   
    print("------------------------- PREVISIONI: ------------------------------")
    input_prediction = clf.predict(x_new)
    print(input_prediction)
-   print("[1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1]")
-   '''
+   
+   
    print("\n************************************************************************************************\n")
 
 
@@ -91,12 +91,12 @@ def print_result_svm(clf, x_test, y_test, x_new):
    print("------------------------- Risultati test SVM: ------------------------------")
 
    print(clf.score(x_test, y_test))
-   '''
+   
    print("------------------------- PREVISIONI: ------------------------------")
    input_prediction = clf.predict(x_new)
    print(input_prediction)
-   print("[1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1]")
-   '''
+   
+   
    print("\n************************************************************************************************\n")
 
 
