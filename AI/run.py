@@ -148,3 +148,4 @@ if __name__=='__main__':
    print_result_decision_tree(modello_decision_tree, X_test, Y_test, X_new)
    print_result_random_forest(modello_random_forest, X_train, X_test, Y_test, X_new)
    print_result_svm(modello_svm, X_test, Y_test, X_new)
+   

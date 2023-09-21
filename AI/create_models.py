@@ -45,18 +45,6 @@ def neural_network(x_train, y_train, x_test, y_test):
  model.fit(x_train, y_train, epochs=10, validation_split=0.2)
 
  model.save("modello_rete_neurale.h5")
-
- '''
- model.evaluate(x_test,  y_test, verbose=2)
-
- probability_model = tf.keras.Sequential([
-    model,
-    tf.keras.layers.Softmax()
- ])
-
-
- 
- '''
  
 
 def decision_tree(x_train, y_train, x_test, y_test):
@@ -176,8 +164,8 @@ if __name__=='__main__':
   print(min(X_test[:, 0]))
   print(max(X_test[:, 0]))
 
-  plt.hist(X_test[:, 0], bins=200)
-  plt.show()
+  #plt.hist(X_test[:, 0], bins=200)
+  #plt.show()
   
 
   X_max_min_diff = X_max - X_min
