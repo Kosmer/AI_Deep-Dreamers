@@ -38,9 +38,8 @@ def createdataset(filename, file_author):
         pos17.append(lista[17])
         pos18.append(lista[18])
 
-    #df = pd.DataFrame(list(zip(author,word_count,sentence_count, comma_count, exclamation_count, unique_word_count, mean_words_phrases)), columns = ['author','word_count','sentence_count', 'comma_count','exclamation_count','unique_word_count','mean_words_phrases'])
     df = pd.DataFrame(list(zip(author,word_count,sentence_count, comma_count, exclamation_count, unique_word_count, mean_words_phrases, polarity, subjectivity, pos0, pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18)), columns = ['author','word_count','sentence_count', 'comma_count','exclamation_count','unique_word_count', 'mean_words_phrases', 'polarity', 'subjectivity','POS0','POS1','POS2','POS3','POS4','POS5','POS6','POS7','POS8','POS9','POS10','POS11','POS12','POS13','POS14','POS15','POS16','POS17','POS18'])
-    #df = pd.DataFrame(attributes, columns=namecolumns)
+    
     return df
 
 
@@ -82,7 +81,6 @@ def createdataset4predict(filename):
         pos18.append(lista[18])
 
 
-    #df = pd.DataFrame(list(zip(author,word_count,sentence_count, comma_count, exclamation_count, unique_word_count, mean_words_phrases)), columns = ['author','word_count','sentence_count', 'comma_count','exclamation_count','unique_word_count','mean_words_phrases'])
     df = pd.DataFrame(list(zip(word_count,sentence_count, comma_count, exclamation_count, unique_word_count, mean_words_phrases, polarity, subjectivity, pos0, pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18)), columns = ['word_count','sentence_count', 'comma_count','exclamation_count','unique_word_count', 'mean_words_phrases', 'polarity', 'subjectivity', 'POS0','POS1','POS2','POS3','POS4','POS5','POS6','POS7','POS8','POS9','POS10','POS11','POS12','POS13','POS14','POS15','POS16','POS17','POS18'])
-    #df = pd.DataFrame(attributes, columns=namecolumns)
+    
     return df

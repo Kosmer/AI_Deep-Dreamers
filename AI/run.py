@@ -1,4 +1,3 @@
-import neuralnetwork
 import dataframe_create
 import numpy as np
 import tensorflow as tf
@@ -26,8 +25,8 @@ def print_result_neural_network(model, x_test, y_test, x_new):
 
    input_pred_label = np.argmax(input_prediction, axis=-1)
    print(input_pred_label)
-   print("[1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1]")
    '''
+
    print("\n************************************************************************************************\n")
 
 
@@ -44,15 +43,15 @@ def print_result_decision_tree(clf, x_test, y_test, x_new):
 
    best_max_depth = clf.best_estimator_.get_params()['max_depth']
 
-   print(f"La profondità ottimale scelta per l'albero decisionale è: {best_max_depth}")
    # plot delle caratteristiche piu importanti ()
    #plot_tree(dt, filled=True, rounded = True, proportion = True)
    #plt.show()
-   
+
+   '''
    print("------------------------- PREVISIONI: ------------------------------")
    input_prediction = clf.predict(x_new)
    print(input_prediction)
-   
+   '''
    
    print("\n************************************************************************************************\n")
    
@@ -73,10 +72,11 @@ def print_result_random_forest(clf, x_train, x_test, y_test, x_new):
    plt.bar(range(0,x_train.shape[1]), clf.best_estimator_.feature_importances_)
    plt.show()
    
+   '''
    print("------------------------- PREVISIONI: ------------------------------")
    input_prediction = clf.predict(x_new)
    print(input_prediction)
-   
+   '''
    
    print("\n************************************************************************************************\n")
 
@@ -92,10 +92,11 @@ def print_result_svm(clf, x_test, y_test, x_new):
 
    print(clf.score(x_test, y_test))
    
+   '''
    print("------------------------- PREVISIONI: ------------------------------")
    input_prediction = clf.predict(x_new)
    print(input_prediction)
-   
+   '''
    
    print("\n************************************************************************************************\n")
 
@@ -134,6 +135,7 @@ if __name__=='__main__':
    X_new = df2.values
    X_new = (X_new - X_min)/ X_max_min_diff
 
+   print("\n************************************************************************************************\n")
    print_result_neural_network(modello_rete_neurale, X_test, Y_test, X_new)
    print_result_decision_tree(modello_decision_tree, X_test, Y_test, X_new)
    print_result_random_forest(modello_random_forest, X_train, X_test, Y_test, X_new)

@@ -1,4 +1,3 @@
-import neuralnetwork
 import dataframe_create
 import numpy as np
 import tensorflow as tf
@@ -19,16 +18,7 @@ import joblib
 
 def neural_network(x_train, y_train, x_test, y_test):
  print("--------------- RETE NEURALE ---------------")
- '''
- print(X_train)
 
- print("--------------------------------------------------")
- #print(df['word_count'].head(25))
- print(df)
- print("--------------------------------------------------")
- print(len(df))
- print("--------------------------------------------------")
- '''
  model = tf.keras.models.Sequential([
     tf.keras.layers.Dense(28, activation='relu'),
     tf.keras.layers.Dense(1000, activation='relu'),
@@ -65,24 +55,7 @@ def neural_network(x_train, y_train, x_test, y_test):
  ])
 
 
- #predizioni con rete neurale
- filename2 = "predizioni"
- file_author2 = "predizioni_autori"
- df2 = dataframe_create.createdataset4predict(filename2)
-
- X_new = df2.values
-  
- #X_new = (X_new - X_min)/(X_max-X_min)
- X_new = (X_new - X_min)/ X_max_min_diff
-
  
-
- input_prediction = model.predict(X_new)
-
- input_pred_label = np.argmax(input_prediction, axis=-1)
-
- print("Predizioni:")
- print(input_pred_label)
  '''
  
 
@@ -205,12 +178,7 @@ if __name__=='__main__':
 
   plt.hist(X_test[:, 0], bins=200)
   plt.show()
-  #print("XMAX")
-  #print(X_max)
-  #print("XMIN")
-  #print(X_min)
-  #X_train = (X_train - X_min)/(X_max-X_min)
-  #X_test = (X_test - X_min)/(X_max-X_min)
+  
 
   X_max_min_diff = X_max - X_min
   X_max_min_diff[X_max_min_diff == 0] = 1   # sostituisci i valori zero con 1

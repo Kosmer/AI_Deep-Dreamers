@@ -63,10 +63,10 @@ with open(file_poesie_originali, 'r', encoding="utf-8-sig") as file1:
 
 # Memorizza il contenuto del file delle poesie degli esseri umani. Successivamente scorre il file, quando trova un * scrive uno 0 (label per esseri umani). 
 with open(file_poesie_originali, 'r', encoding="utf-8-sig") as file1:
-    with open(file_label_poesie_originali, 'w', encoding="utf-8-sig") as poesie_originali:
-        with open(file_label_poesie_originali, "r+", encoding="utf-8-sig") as poesie_originali:
+    with open(file_label_poesie_originali, 'w', encoding="utf-8") as poesie_originali:
+        with open(file_label_poesie_originali, "r+", encoding="utf-8") as poesie_originali:
             for linea in file1:
-                if linea[0]=="*":
+                if "*" in linea:
                     poesie_originali.write("0\n")
             
 
@@ -80,12 +80,13 @@ with open(file_poesie_chatgpt, 'r', encoding="utf-8-sig") as file2:
 
 # Memorizza il contenuto del file delle poesie di chatgpt. Successivamente scorre il file, quando trova un * scrive un 1 (label per chatgpt). 
 with open(file_poesie_chatgpt, 'r', encoding="utf-8-sig") as file2:
-    with open(file_label_poesie_chatgpt, 'w', encoding="utf-8-sig") as poesie_chatgpt:
-        with open(file_label_poesie_chatgpt, "r+", encoding="utf-8-sig") as poesie_chatgpt:
+    with open(file_label_poesie_chatgpt, 'w', encoding="utf-8") as poesie_chatgpt:
+        with open(file_label_poesie_chatgpt, "r+", encoding="utf-8") as poesie_chatgpt:
             for linea in file2:
-                if linea[0]=="*":
+                if "*" in linea:
                     poesie_chatgpt.write("1\n")
-            
+         
+
 
 # Memorizza le label scritte nel file
 with open(file_label_poesie_chatgpt, "r+", encoding="utf-8-sig") as poesie_chatgpt:
@@ -101,6 +102,24 @@ with open(file_poesie_merge, 'w', encoding="utf-8-sig") as file_output:
 
 with open(file_label_merge, 'w', encoding="utf-8-sig") as file_output:
     file_output.write(label_unite)
+
+
+#Elimino il BOM
+
+with open(file_label_merge, 'rb') as file:
+    # Leggi il contenuto del file
+    contenuto = file.read()
+
+    # Controlla se i primi byte corrispondono al BOM in UTF-8
+    if contenuto.startswith(b'\xef\xbb\xbf'):
+        # Rimuovi il BOM
+        contenuto_senza_bom = contenuto[3:]
+        
+        # Sovrascrivi il file con il nuovo contenuto
+        with open(file_label_merge, 'wb') as file_sovrascrittura:
+            file_sovrascrittura.write(contenuto_senza_bom)
+
+
 
 
 # Rimuove i file parziali con le label parziali (solo chatgpt e solo esseri umani)

@@ -1,33 +1,7 @@
-#andrebbe fatta una sorta di normalizzazione del testo, mettere tutti i verbi in forma base
-#eliminare i superlativi ecc, togliere @Nomi @Date @Luoghi
-
-#alcune proprietà piu complesse ma da fare
-#elenco inverso delle parole nel testo
-# n-gram (almeno quello da 4)
-# n-word (almeno quello da 2)
-# POS tagging (almeno 1 e 2)
-#rarità delle parole
-
-
-
-#normalizzazione del testo 
-# Probabilmente non usata, ne nltk ne la normalizzazione
-'''
-import nltk
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-'''
 import re
 import spacy
 from pattern.it import sentiment
-from nltk.corpus import cmudict
 
-'''
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-'''
 
 def normalize_text(text):
     tokens = word_tokenize(text)
@@ -217,25 +191,4 @@ def author(filename):
         return ris
 
 
-
-
-
-
-'''
-if __name__=='__main__':
-    filename = input("Inserisci il nome del file: ")
-    word_count = word_count("./" + filename + ".txt")
-    print("La lunghezza del testo in parole è:", word_count)
-    sentence_count = sentence_count("./" + filename + ".txt")
-    print("Il numero di frasi è:", sentence_count)
-    comma_count = comma_count("./" + filename + ".txt")
-    print("Il numero di virgole è:", comma_count)
-    exclamation_count = exclamation_count("./" + filename + ".txt")
-    print("Il numero di punti esclamativi è:", exclamation_count)
-    unique_word_count = unique_word_count2("./" + filename + ".txt")
-    print("Il numero di parole diverse è:", unique_word_count)
-    mean_words_phrases = mean_words_phrases(word_count, sentence_count)
-    print("Il numero di parole per frase (word_count/sentence_count) è:", mean_words_phrases)
-    number("./" + filename + ".txt")
-'''  
     
