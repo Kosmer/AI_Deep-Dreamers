@@ -34,11 +34,14 @@ def print_result_neural_network(model, x_test, y_test, x_new):
 def print_result_decision_tree(clf, x_test, y_test, x_new):
    # stampa la migliore combinazione di parametri e punteggio
    print("------------------------- Risultati train decision tree: ------------------------------")
+   print("Best params:")
    print(clf.best_params_)
-   print(clf.best_estimator_)
-   print(clf.best_score_)
+   #print(clf.best_estimator_)
+   #print(clf.best_score_)
+   print("\nClassification report:")
    print(classification_report(y_test, clf.predict(x_test)))
    print("------------------------- Risultati test decision tree: ------------------------------")
+   print("Accuracy:")
    print(clf.score(x_test, y_test))
 
    best_max_depth = clf.best_estimator_.get_params()['max_depth']
@@ -61,16 +64,19 @@ def print_result_decision_tree(clf, x_test, y_test, x_new):
 def print_result_random_forest(clf, x_train, x_test, y_test, x_new):
    # stampa la migliore combinazione di parametri e punteggio
    print("------------------------- Risultati train random forest: ------------------------------")
+   print("Best params:")
    print(clf.best_params_)
-   print(clf.best_estimator_)
-   print(clf.best_score_)
+   #print(clf.best_estimator_)
+   #print(clf.best_score_)
+   print("\nClassification report:")
    print(classification_report(y_test, clf.predict(x_test)))
    print("------------------------- Risultati test random forest: ------------------------------")
+   print("Accuracy:")
    print(clf.score(x_test, y_test))
 
-   # dal grafico si vede l'importanza di una feature (i tag non servono quasi a nulla)
-   plt.bar(range(0,x_train.shape[1]), clf.best_estimator_.feature_importances_)
-   plt.show()
+   # dal grafico si vede l'importanza di ogni feature 
+   #plt.bar(range(0,x_train.shape[1]), clf.best_estimator_.feature_importances_)
+   #plt.show()
    
    '''
    print("------------------------- PREVISIONI: ------------------------------")
@@ -84,12 +90,14 @@ def print_result_random_forest(clf, x_train, x_test, y_test, x_new):
 def print_result_svm(clf, x_test, y_test, x_new):
    # stampa la migliore combinazione di parametri e punteggio
    print("------------------------- Risultati train SVM: ------------------------------")
+   print("Best params:")
    print(clf.best_params_)
-   print(clf.best_estimator_)
-   print(clf.best_score_)
+   #print(clf.best_estimator_)
+   #print(clf.best_score_)
+   print("\nClassification report:")
    print(classification_report(y_test, clf.predict(x_test)))
    print("------------------------- Risultati test SVM: ------------------------------")
-
+   print("Accuracy:")
    print(clf.score(x_test, y_test))
    
    '''

@@ -185,10 +185,10 @@ if __name__=='__main__':
   X_train = (X_train - X_min) / X_max_min_diff
   X_test = (X_test - X_min)/  X_max_min_diff
 
-  # Salvo i valori x_test e y_test. Mi saranno utili per mostrare gli score ottenuti con i vari modelli successivamente
+  # Salvo i valori x_min e x_max_min_diff. Mi saranno utili per mostrare gli score ottenuti con i vari modelli successivamente
   np.savez('x_max_min.npz', X_min= X_min, X_max_min_diff = X_max_min_diff)
   
-  # Salvo i valori x_test e y_test. Mi saranno utili per mostrare gli score ottenuti con i vari modelli successivamente
+  # Salvo i valori x_train, x_test e y_test. Mi saranno utili per mostrare gli score ottenuti con i vari modelli successivamente
   np.savez('dati_test.npz', X_train= X_train, X_test=X_test, Y_test=Y_test)
 
   #rete neurale
